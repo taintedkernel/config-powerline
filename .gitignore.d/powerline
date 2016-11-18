@@ -1,0 +1,11 @@
+*
+!/bin
+!/bin/install-powerline.sh
+!/.config
+!/.config/powerline
+!/.config/powerline/config.json
+!/.config/powerline/themes
+!/.config/powerline/themes/shell
+!/.config/powerline/themes/shell/custom.json
+!/.gitignore.d
+!/.gitignore.d/powerline
