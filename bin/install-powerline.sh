@@ -58,7 +58,7 @@ which powerline-config >/dev/null 2>&1
 RET=$?
 
 if [ "$RET" -ne 0 ]; then
-    echo "PATH not configured correctly, attempting to fix"
+    echo "PATH not configured correctly, attempting to fix [$PATH]"
     PL_BIN=$( python -c "import os;print os.path.dirname(os.path.abspath(os.path.join('$PL_INSTALL', '../../../bin/powerline-config')))" )
     echo "Powerline binaries detected [$PL_BIN]"
 
@@ -146,7 +146,8 @@ else
   FONTS="$HOME/.fonts"
 fi
 
-FONTS_INSTALLED=$( find $FONTS | grep -i powerline | wc -l )
+# If $FONTS doesn't exist, it will fail
+FONTS_INSTALLED=$( find $FONTS 2>/dev/null | grep -i powerline | wc -l )
 
 if [ $FONTS_INSTALLED -eq "0" ]; then
     echo "You may want to install the custom powerline fonts by:"
