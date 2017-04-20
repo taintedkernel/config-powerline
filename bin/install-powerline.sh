@@ -34,23 +34,22 @@ fi
 
 ### Check for powerline version ###
 if [ "$VERBOSE" -eq 0 ]; then
-    PL_VERSION=$( pip search powerline-status 2>/dev/null | grep INSTALLED | awk '{ print $2 }' )
-    PL_LATEST=$( pip search powerline-status 2>/dev/null | grep LATEST | awk '{ print $2 }' )
+    PL_VERSION=$( pip search powerline-status --timeout 5 --retries 3 2>/dev/null | grep INSTALLED | awk '{ print $2 }' )
+    PL_LATEST=$( pip search powerline-status --timeout 5 --retries 3 2>/dev/null | grep LATEST | awk '{ print $2 }' )
 else
-    PL_VERSION=$( pip search powerline-status | grep INSTALLED | awk '{ print $2 }' )
-    PL_LATEST=$( pip search powerline-status | grep LATEST | awk '{ print $2 }' )
+    PL_VERSION=$( pip search powerline-status --timeout 5 --retries 3 | grep INSTALLED | awk '{ print $2 }' )
+    PL_LATEST=$( pip search powerline-status --timeout 5 --retries 3 | grep LATEST | awk '{ print $2 }' )
 fi
 
 if [ -z "$PL_VERSION" ]; then
-    echo "Powerline version not detected correctly, aboring [$PL_VERSION]"
-    exit 1
-fi
-
-#if [ "$PL_VERSION" != "$PL_LATEST" -a ! -z "$PL_LATEST" -a "$VERBOSE" -gt 0 ]; then
-if [ "$PL_VERSION" != "$PL_LATEST" -a ! -z "$PL_LATEST" ]; then
-    echo "Installed powerline version [$PL_VERSION], latest [$PL_LATEST]"
-elif [ "$VERBOSE" -ge 1 ]; then
-    echo "Powerline version, latest [$PL_VERSION]"
+    echo "Powerline version not detected correctly, skipping check [$PL_VERSION]"
+else
+    #if [ "$PL_VERSION" != "$PL_LATEST" -a ! -z "$PL_LATEST" -a "$VERBOSE" -gt 0 ]; then
+    if [ "$PL_VERSION" != "$PL_LATEST" -a ! -z "$PL_LATEST" ]; then
+        echo "Installed powerline version [$PL_VERSION], latest [$PL_LATEST]"
+    elif [ "$VERBOSE" -ge 1 ]; then
+        echo "Powerline version, latest [$PL_VERSION]"
+    fi
 fi
 
 ### Check for PATH set correctly ###
