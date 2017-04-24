@@ -34,11 +34,11 @@ fi
 
 ### Check for powerline version ###
 if [ "$VERBOSE" -eq 0 ]; then
-    PL_VERSION=$( pip search powerline-status --timeout 5 --retries 3 2>/dev/null | grep INSTALLED | awk '{ print $2 }' )
-    PL_LATEST=$( pip search powerline-status --timeout 5 --retries 3 2>/dev/null | grep LATEST | awk '{ print $2 }' )
+    PL_VERSION=$( timeout 10 pip search powerline-status 2>/dev/null | grep INSTALLED | awk '{ print $2 }' )
+    PL_LATEST=$( timeout 10 pip search powerline-status 2>/dev/null | grep LATEST | awk '{ print $2 }' )
 else
-    PL_VERSION=$( pip search powerline-status --timeout 5 --retries 3 | grep INSTALLED | awk '{ print $2 }' )
-    PL_LATEST=$( pip search powerline-status --timeout 5 --retries 3 | grep LATEST | awk '{ print $2 }' )
+    PL_VERSION=$( timeout 10 pip search powerline-status | grep INSTALLED | awk '{ print $2 }' )
+    PL_LATEST=$( timeout 10 pip search powerline-status | grep LATEST | awk '{ print $2 }' )
 fi
 
 if [ -z "$PL_VERSION" ]; then
