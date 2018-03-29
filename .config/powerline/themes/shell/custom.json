@@ -17,7 +17,7 @@
                         "priority": 50,
                         "args": {
                             "unit": "F",
-                            "location_query": "94040",
+                            "location_query": "98004",
                             "icons": {
                                 "day":           "〇",
                                 "blustery":      "⚑ ",
