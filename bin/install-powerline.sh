@@ -66,11 +66,12 @@ if [ "$RET" -ne 0 ]; then
         echo "Error condition detected, powerline-config not found but PATH configured correctly, aborting"
         exit 1
     else
-        echo "Adding powerline PATH (via .bashrc, edit to taste) [$PATH]"
-        echo "export PATH=\$PATH:$PL_BIN" | tee -a $HOME/.bashrc
+        echo "Add powerline PATH to startup with the following: (via .bashrc, or to taste) [$PATH]"
+        export PATH=$PATH:$PL_BIN 
+        echo "export PATH=\$PATH:$PL_BIN | tee -a $HOME/.bashrc"
     fi
     
-    source $HOME/.bashrc
+    #source $HOME/.bashrc
 elif [ "$VERBOSE" -ge 1 ]; then
     PL_BIN=$( dirname `which powerline-config` )
     echo "PATH configured correctly, powerline binaries detected [$PL_BIN]"
@@ -93,45 +94,45 @@ elif [ "$VERBOSE" -ge 1 ]; then
 fi
 
 
-### Check to see if Bash script is found ###
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
-
-#PL_INSTALL=$( pip show powerline-status | grep Location | awk '{ print $2 }' )
-PL_BASH="$PL_INSTALL/powerline/bindings/bash/powerline.sh"
-
-if [ ! -f "$PL_BASH" ]; then
-    echo "Powerline installed [$PL_INSTALL]"
-    echo "Bash binding script not detected, aborting [$PL_BASH]"
-    exit 1
-elif [ "$VERBOSE" -ge 1 ]; then
-    echo "Powerline installed [$PL_INSTALL]"
-    echo "Bash binding script present [$PL_BASH]"
-fi
-
-
-### Check for configs ###
-if [ ! -d "$HOME/.config/powerline" ]; then
-    echo "Powerline local config not present, creating [$HOME/.config/powerline]"
-    mkdir -p $HOME/.config/powerline
-
-    # Copy files from powerline installation, then supplement/override with our custom ones
-    echo "Copying config from powerline installation"
-    cp -R $PL_INSTALL/powerline/config_files/* $HOME/.config/powerline
-
-    # TODO: Make sure we're in "git/dotfiles/powerline" (or the like)
-    echo "Adding custom config"
-    cp .config/powerline/themes/shell/custom.json $HOME/.config/powerline/themes/shell/custom.json
-
-    THEME=$(grep -A10 '"shell":' $HOME/.config/powerline/config.json | grep '"theme"' | head -1 | cut -d':' -f2 | sed 's/.*"\([^"]*\)".*/\1/')
-    echo "Current theme [$THEME]"
-    echo
-    echo "Edit $HOME/.config/powerline/config.json to point to new custom.json (eg: \"theme\": \"custom\")"
-    echo "Kill powerline-daemon after update to take effect (powerline-daemon -k)"
-    echo
-elif [ "$VERBOSE" -ge 1 ]; then
-    echo "Powerline config present [$HOME/.config/powerline]"
-fi
+#### Check to see if Bash script is found ###
+#POWERLINE_BASH_CONTINUATION=1
+#POWERLINE_BASH_SELECT=1
+#
+##PL_INSTALL=$( pip show powerline-status | grep Location | awk '{ print $2 }' )
+#PL_BASH="$PL_INSTALL/powerline/bindings/bash/powerline.sh"
+#
+#if [ ! -f "$PL_BASH" ]; then
+#    echo "Powerline installed [$PL_INSTALL]"
+#    echo "Bash binding script not detected, aborting [$PL_BASH]"
+#    exit 1
+#elif [ "$VERBOSE" -ge 1 ]; then
+#    echo "Powerline installed [$PL_INSTALL]"
+#    echo "Bash binding script present [$PL_BASH]"
+#fi
+#
+#
+#### Check for configs ###
+#if [ ! -d "$HOME/.config/powerline" ]; then
+#    echo "Powerline local config not present, creating [$HOME/.config/powerline]"
+#    mkdir -p $HOME/.config/powerline
+#
+#    # Copy files from powerline installation, then supplement/override with our custom ones
+#    echo "Copying config from powerline installation"
+#    cp -R $PL_INSTALL/powerline/config_files/* $HOME/.config/powerline
+#
+#    # TODO: Make sure we're in "git/dotfiles/powerline" (or the like)
+#    echo "Adding custom config"
+#    cp .config/powerline/themes/shell/custom.json $HOME/.config/powerline/themes/shell/custom.json
+#
+#    THEME=$(grep -A10 '"shell":' $HOME/.config/powerline/config.json | grep '"theme"' | head -1 | cut -d':' -f2 | sed 's/.*"\([^"]*\)".*/\1/')
+#    echo "Current theme [$THEME]"
+#    echo
+#    echo "Edit $HOME/.config/powerline/config.json to point to new custom.json (eg: \"theme\": \"custom\")"
+#    echo "Kill powerline-daemon after update to take effect (powerline-daemon -k)"
+#    echo
+#elif [ "$VERBOSE" -ge 1 ]; then
+#    echo "Powerline config present [$HOME/.config/powerline]"
+#fi
 
 
 #PL_BIN=$( python -c 'import pkgutil; print pkgutil.get_loader("powerline").filename' )
@@ -160,9 +161,9 @@ elif [ "$VERBOSE" -ge 1 ]; then
     echo "Powerline custom fonts present [$FONTS]"
 fi
 
-if [ "$VERBOSE" -gt 0 ]; then
-    echo "Loading Bash script [$PL_BASH]"
-fi
-
-source $PL_BASH
+#if [ "$VERBOSE" -gt 0 ]; then
+#    echo "Loading Bash script [$PL_BASH]"
+#fi
+#
+#source $PL_BASH
 
