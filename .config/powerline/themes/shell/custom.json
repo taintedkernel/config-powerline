@@ -55,6 +55,10 @@
                 "priority": 50
             },
             {
+                "function": "powerline_vcsh.vcsh_repo",
+                "priority": 50
+            },
+            {
                 "function": "powerline.segments.common.vcs.branch",
                 "priority": 40
             },
