@@ -36,7 +36,10 @@
                     },
                     {
                         "function": "powerline.segments.common.net.hostname",
-                        "priority": 10
+                        "priority": 10,
+                        "args": {
+                            "only_if_ssh": false
+                        }
                     },
                     {
                         "function": "powerline.segments.common.sys.uptime",
