@@ -12,29 +12,6 @@
                         }
                     },
                     {
-                        "name": "weather",
-                        "function": "powerline.segments.common.wthr.weather",
-                        "priority": 50,
-                        "args": {
-                            "unit": "F",
-                            "location_query": "98004",
-                            "icons": {
-                                "day":           "〇",
-                                "blustery":      "⚑ ",
-                                "rainy":         "☔ ",
-                                "cloudy":        "☁ ",
-                                "snowy":         "❅ ",
-                                "stormy":        "☈ ",
-                                "foggy":         "≡ ",
-                                "sunny":         "☼ ",
-                                "night":         "☾ ",
-                                "windy":         "☴ ",
-                                "not_available": "� ",
-                                "unknown":       "⚠ "
-                            }
-                        }
-                    },
-                    {
                         "function": "powerline.segments.common.net.hostname",
                         "priority": 10,
                         "args": {
